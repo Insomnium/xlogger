@@ -9,8 +9,8 @@
     <ResourceLink name="jdbc/xlogger" global="jdbc/xlogger" auth="Container" type="javax.sql.DataSource" />
     ``` 
     - Describe _xlogger_ resource in ```server.xml``` file:
-```
-<Resource name="jdbc/xlogger"
+    ```
+    <Resource name="jdbc/xlogger"
               auth="Container"
               type="javax.sql.DataSource"
               driverClassName="org.postgresql.Driver"
@@ -23,7 +23,7 @@
               removeAbandoned="true"
               removeAbandonedTimeout="600"
               logAbandoned="true"/>
-```
+    ```
 
     - Just as a reminder - it would be useful to add this setting into ```tomcat-users.xml``` file:
 
