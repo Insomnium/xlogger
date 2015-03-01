@@ -24,7 +24,9 @@
               removeAbandonedTimeout="600"
               logAbandoned="true"/>
 ```
+
     - Just as a reminder - it would be useful to add this setting into ```tomcat-users.xml``` file:
+
 ```
 <user username="tomcat" password="tomcat" roles="manager-gui,admin,admin-gui"/>
 ```
