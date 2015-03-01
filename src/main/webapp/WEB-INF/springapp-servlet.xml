@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:p='http://www.springframework.org/schema/p' xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!-- the application context definition for the springapp DispatcherServlet -->
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="useSuffixPatternMatch" value="false"/>
+    </bean>
+
+    <context:component-scan base-package="net.ins.xlogger" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven content-negotiation-manager="cnManager" />
+
+    <!--<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>-->
+
+    <mvc:default-servlet-handler />
+
+    <!--<mvc:resources mapping="/gallery/*.jpg" location="/gallery/" cache-period="31556926"/>-->
+
+    <!--<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" cache-period="315360000"/>-->
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="cnManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="defaultContentType" value="text/html" />
+        <property name="mediaTypes">
+            <props>
+                <prop key="json">application/json</prop>
+                <!--<prop key="xml">application/xml</prop>-->
+                <!--<prop key="rss">application/rss+xml</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" p:order="1" />
+
+    <bean id="contentNegotiationManager" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager" ref="cnManager"/>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/pages/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+                <bean class="net.ins.xlogger.util.JsonViewResolver">
+                    <property name="usePrettyPrint" value="true" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="maxUploadSize" value="3500000"/>-->
+    <!--</bean>-->
+
+    <!--<mvc:interceptors>-->
+        <!--<bean class="net.ins.xlogger.monitoring.Perf4jHandlerInterceptor"/>-->
+    <!--</mvc:interceptors>-->
+
+</beans>
