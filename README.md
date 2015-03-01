@@ -27,9 +27,9 @@
 
     - Just as a reminder - it would be useful to add this setting into ```tomcat-users.xml``` file:
 
-```
-<user username="tomcat" password="tomcat" roles="manager-gui,admin,admin-gui"/>
-```
+    ```
+    <user username="tomcat" password="tomcat" roles="manager-gui,admin,admin-gui"/>
+    ```
 3. Actualize ```sql/liquibase.config``` properties file
 
 4. Execue ```scripts/prepareServer.sh``` to create database schema
