@@ -25,10 +25,6 @@
 
     <mvc:default-servlet-handler />
 
-    <!--<mvc:resources mapping="/gallery/*.jpg" location="/gallery/" cache-period="31556926"/>-->
-
-    <!--<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" cache-period="315360000"/>-->
-
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -63,6 +59,23 @@
             </list>
         </property>
     </bean>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:bundles/messages" />
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+    </mvc:interceptors>
 
     <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
         <!--<property name="maxUploadSize" value="3500000"/>-->

@@ -63,4 +63,51 @@
                                  referencedColumnNames="role_id" />
     </changeSet>
 
+    <changeSet id="20150303_addUserActivatedColumn" author="Ins137@gmail.com" >
+        <addColumn  tableName="users">
+            <column name="activated" type="boolean" defaultValueBoolean="false" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20150403_fillBasicRoles" author="Ins137@gmail.com">
+        <insert tableName="roles">
+            <column name="role_id">0</column>
+            <column name="role_sys_name">ROLE_ADMIN</column>
+            <column name="role_name">Admin role</column>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_id">1</column>
+            <column name="role_name">Guest role</column>
+            <column name="role_sys_name">ROLE_GUEST</column>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_id">2</column>
+            <column name="role_sys_name">ROLE_USER</column>
+            <column name="role_name">Common user role</column>
+        </insert>
+        <rollback>
+            <delete tableName="roles"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="20150403_addAdministrator" author="Ins137@gmail.com">
+        <insert tableName="users">
+            <column name="user_id">0</column>
+            <column name="first_name">Iogr</column>
+            <column name="last_name">Pertov</column>
+            <column name="email">Ins137@gmail.com</column>
+            <column name="password">$2a$10$rux4QWbakY.bgPmGmZxi7.XLiWKiFy1GULMYA03HMhv1FYgns3Vym</column>
+            <column name="avatar">avastars/1.jpg</column>
+            <column name="login">Admin</column>
+            <column name="blocked" valueBoolean="false" />
+            <column name="activated" valueBoolean="true" />
+            <column name="info">Administrator</column>
+        </insert>
+
+
+        <insert tableName="user_roles">
+            <column name="user_id">0</column>
+            <column name="role_id">0</column>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

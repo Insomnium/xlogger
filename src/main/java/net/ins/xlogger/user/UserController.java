@@ -1,6 +1,7 @@
 package net.ins.xlogger.user;
 
 import net.ins.xlogger.user.dao.UserDao;
+import net.ins.xlogger.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

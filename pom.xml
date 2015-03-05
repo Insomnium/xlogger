@@ -9,8 +9,10 @@
 
   <properties>
     <dependency.spring.version>4.1.5.RELEASE</dependency.spring.version>
-    <spring.security.version>3.1.6.RELEASE</spring.security.version>
+    <spring.security.version>3.2.6.RELEASE</spring.security.version>
     <jdbc.postgresql.version>9.3-1102-jdbc41</jdbc.postgresql.version>
+    <hibernate.version>4.3.8.Final</hibernate.version>
+    <slf4j.version>1.7.5</slf4j.version>
   </properties>
 
   <dependencies>
@@ -82,7 +84,7 @@
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
-      <version>1.0.0.GA</version>
+      <version>1.1.0.Final</version>
     </dependency>
     <dependency>
       <groupId>taglibs</groupId>
@@ -120,16 +122,19 @@
       <artifactId>spring-security-core</artifactId>
       <version>${spring.security.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
       <version>${spring.security.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
       <version>${spring.security.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-taglibs</artifactId>
@@ -143,11 +148,11 @@
 
     <!-- Cache -->
 
-    <dependency>
-      <groupId>net.sf.ehcache</groupId>
-      <artifactId>ehcache-core</artifactId>
-      <version>2.6.10</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>net.sf.ehcache</groupId>-->
+      <!--<artifactId>ehcache-core</artifactId>-->
+      <!--<version>2.6.10</version>-->
+    <!--</dependency>-->
 
     <!-- Jackson -->
 
@@ -156,6 +161,70 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.5.1</version>
     </dependency>
+
+    <!-- Hibernate -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.0.1.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${dependency.spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-ehcache</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!-- Utils -->
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.9.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+
+    <!-- Logger -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Sitemesh decorator -->
+    <dependency>
+      <groupId>opensymphony</groupId>
+      <artifactId>sitemesh</artifactId>
+      <version>2.4.2</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -215,12 +284,12 @@
             <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
               <port>8085</port>
             </connector>
-            <!--<connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">-->
-              <!--<port>8443</port>-->
-              <!--<keystore>${project.build.testOutputDirectory}/test.jks</keystore>-->
-              <!--<password>qwerty</password>-->
-              <!--<keyPassword>qwerty</keyPassword>-->
-            <!--</connector>-->
+            <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
+              <port>8443</port>
+              <keystore>${project.build.testOutputDirectory}/test.jks</keystore>
+              <password>Qwerty123</password>
+              <keyPassword>Qwerty123</keyPassword>
+            </connector>
           </connectors>
         </configuration>
       </plugin>
