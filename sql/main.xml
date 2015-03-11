@@ -6,4 +6,5 @@
 
     <!--<includeAll path="sql/scripts/" />-->
     <include file="scripts/user.xml" relativeToChangelogFile="true" />
+    <include file="scripts/msg.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

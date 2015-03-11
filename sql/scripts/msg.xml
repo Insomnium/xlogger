@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20150306_createMsgTable" author="Ins137@gmail.com">
+        <createTable tableName="msg">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="body" type="varchar(4000)">
+                <constraints nullable="false" />
+            </column>
+            <column name="markup" type="varchar(30)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="post_date" type="datetime">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20150306_createTopicTable" author="Ins137@gmail.com">
+        <createTable tableName="topic">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="body" type="varchar(4000)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="markup" type="varchar(30)">
+                <constraints nullable="false" />
+            </column>
+            <column name="post_date" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_mod_date" type="datetime" />
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_draft" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+            <column name="resolved" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+            <column name="shout" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20150306_addMsgAndTopicSubjectColumn" author="Ins137@gmail.com" >
+        <addColumn tableName="msg">
+            <column name="subject" type="varchar(50)"  />
+        </addColumn>
+
+        <addColumn tableName="topic">
+            <column name="subject" type="varchar(50)"  >
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20150307_addMessageTopicId" author="Ins137@gmail.com" >
+        <addColumn tableName="msg">
+            <column name="topicId" type="bigint" />
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -31,6 +31,11 @@ public class AuthUtil {
         return ((UserDetailsImpl) principal).getUser();
     }
 
+    public static long getUserId() {
+        User user = getUserDetails();
+        return user != null ? user.getId() : -1;
+    }
+
     public static Properties getCookies(Cookie[] cookies) {
         Properties p = new Properties();
         if (cookies == null) {

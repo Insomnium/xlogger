@@ -1,0 +1,3 @@
+1. Accomplish commenting from wall implementation
+2. Add 'replyTo' field to message table. So there will be 2 identifiers: topicId and replyTo (message relative). Both
+    are nullable.

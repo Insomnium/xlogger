@@ -28,6 +28,7 @@
         <property name="packagesToScan" >
             <list>
                 <value>net.ins.xlogger.user.entities</value>
+                <value>net.ins.xlogger.msg.entities</value>
             </list>
         </property>
         <property name="hibernateProperties">

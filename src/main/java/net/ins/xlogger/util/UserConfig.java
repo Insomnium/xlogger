@@ -49,4 +49,8 @@ public class UserConfig {
     public boolean isAuthenticated() {
         return this.userDetails != null;
     }
+
+    public int getWallSize() {
+        return this.config.getWallPageSize();
+    }
 }

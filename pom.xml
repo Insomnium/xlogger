@@ -242,7 +242,7 @@
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
-        <version>3.0.5</version>
+        <version>3.3.2</version>
 
         <configuration>
           <propertyFile>sql/liquibase.config</propertyFile>

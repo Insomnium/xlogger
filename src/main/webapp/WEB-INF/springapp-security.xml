@@ -22,7 +22,7 @@
         <intercept-url pattern="/registration" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <form-login login-page="/login"
-                    default-target-url="/sample"
+                    default-target-url="/wall"
                     authentication-failure-url="/login?error=true"
                     password-parameter="passwd"
                     username-parameter="login"

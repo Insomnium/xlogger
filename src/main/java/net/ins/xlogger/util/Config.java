@@ -13,12 +13,15 @@ import java.util.Properties;
 @Service("config")
 public class Config {
 
+    private static final int DEFAULT_WALL_SIZE_MSG_COUNT = 25;
+
     @Qualifier("properties")
     @Autowired
     private Properties properties;
     private String mainURI;
     private String secureUrl;
     private int csrfCookieExpirationTime;
+    private int wallPageSize;
 
     @PostConstruct
     private void init() {
@@ -26,6 +29,11 @@ public class Config {
             mainURI = properties.getProperty("mainUri");
             csrfCookieExpirationTime = Integer.parseInt(properties.getProperty("csrfCookieExpirationTime"));
             secureUrl = properties.getProperty("secureUrl");
+            if (properties.getProperty("wall.page_size") != null) {
+                wallPageSize = Integer.parseInt(properties.getProperty("wall.page_size"));
+            } else {
+                wallPageSize = DEFAULT_WALL_SIZE_MSG_COUNT;
+            }
         } catch (Exception e) {
             throw new RuntimeException("Error occurred reading application configuration");
         }
@@ -41,5 +49,9 @@ public class Config {
 
     public String getSecureUrl() {
         return secureUrl;
+    }
+
+    public int getWallPageSize() {
+        return wallPageSize;
     }
 }
