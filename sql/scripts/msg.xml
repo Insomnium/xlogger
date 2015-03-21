@@ -67,7 +67,13 @@
 
     <changeSet id="20150307_addMessageTopicId" author="Ins137@gmail.com" >
         <addColumn tableName="msg">
-            <column name="topicId" type="bigint" />
+            <column name="topic_id" type="bigint" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20150322_addReplyToMessageColumn" author="Ins137@gmail.com" >
+        <addColumn tableName="msg">
+            <column name="reply_to" type="bigint" />
         </addColumn>
     </changeSet>
 </databaseChangeLog>

@@ -5,6 +5,7 @@ import net.ins.xlogger.msg.MarkupType;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ins on 3/6/15.
@@ -12,7 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "MSG")
 @NamedQueries({
-        @NamedQuery(name = "message.getByTopicId", query = "select m from Message m where m.topicId = :topicId")
+        @NamedQuery(name = "message.getByTopicId", query = "select m from Message m where m.topic.id = :topicId")
 })
 public class Message implements Serializable {
 
@@ -34,8 +35,18 @@ public class Message implements Serializable {
     @Column(name = "post_date", insertable = true, updatable = false, nullable = false, unique = false)
     private Date postDate;
 
-    @Column(name = "topicId", insertable = true, updatable = false, nullable = true, unique = false)
-    private Long topicId;
+//    @Column(name = "topic_id", insertable = true, updatable = false, nullable = true, unique = false)
+//    private Long topicId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id")
+    private Topic topic;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reply_to")
+    private Message replyTo;
+
+    @OneToMany(mappedBy = "replyTo")
+    private List<Message> replies;
 
     public Message() {
 
@@ -88,12 +99,28 @@ public class Message implements Serializable {
         this.subject = subject;
     }
 
-    public Long getTopicId() {
-        return topicId;
+    public Message getReplyTo() {
+        return replyTo;
     }
 
-    public void setTopicId(Long topicId) {
-        this.topicId = topicId;
+    public void setReplyTo(Message replyTo) {
+        this.replyTo = replyTo;
+    }
+
+    public List<Message> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(List<Message> replies) {
+        this.replies = replies;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     @Override
@@ -107,8 +134,10 @@ public class Message implements Serializable {
         if (id != null ? !id.equals(message.id) : message.id != null) return false;
         if (markupType != message.markupType) return false;
         if (postDate != null ? !postDate.equals(message.postDate) : message.postDate != null) return false;
+        if (replies != null ? !replies.equals(message.replies) : message.replies != null) return false;
+        if (replyTo != null ? !replyTo.equals(message.replyTo) : message.replyTo != null) return false;
         if (subject != null ? !subject.equals(message.subject) : message.subject != null) return false;
-        if (topicId != null ? !topicId.equals(message.topicId) : message.topicId != null) return false;
+        if (topic != null ? !topic.equals(message.topic) : message.topic != null) return false;
 
         return true;
     }
@@ -120,7 +149,9 @@ public class Message implements Serializable {
         result = 31 * result + (subject != null ? subject.hashCode() : 0);
         result = 31 * result + (markupType != null ? markupType.hashCode() : 0);
         result = 31 * result + (postDate != null ? postDate.hashCode() : 0);
-        result = 31 * result + (topicId != null ? topicId.hashCode() : 0);
+        result = 31 * result + (topic != null ? topic.hashCode() : 0);
+        result = 31 * result + (replyTo != null ? replyTo.hashCode() : 0);
+        result = 31 * result + (replies != null ? replies.hashCode() : 0);
         return result;
     }
 
@@ -132,7 +163,9 @@ public class Message implements Serializable {
                 ", subject='" + subject + '\'' +
                 ", markupType=" + markupType +
                 ", postDate=" + postDate +
-                ", topicId=" + topicId +
+                ", topic=" + topic +
+                ", replyTo=" + replyTo +
+                ", replies=" + replies +
                 '}';
     }
 }

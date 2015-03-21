@@ -3,8 +3,7 @@ function changeGetParam(uri, key, value) {
     var delim = uri.indexOf('?') !== -1 ? "&" : "?";
     if (uri.match(re)) {
         return uri.replace(re, '$1' + key + "=" + value + '$2');
-    }
-    else {
+    } else {
         return uri + delim + key + "=" + value;
     }
 }

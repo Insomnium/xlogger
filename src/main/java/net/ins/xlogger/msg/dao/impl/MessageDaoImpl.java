@@ -3,6 +3,7 @@ package net.ins.xlogger.msg.dao.impl;
 import net.ins.xlogger.common.MessageDaoException;
 import net.ins.xlogger.msg.dao.MessageDao;
 import net.ins.xlogger.msg.entities.Message;
+import net.ins.xlogger.msg.entities.Topic;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -69,17 +70,18 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    @Transactional(propagation = Propagation.NEVER)
-    public long createMessage(Message message) throws MessageDaoException {
-        Session session = sessionFactory.openSession();
+    @Transactional(propagation = Propagation.REQUIRED)
+    public long createMessage(Message message, Long topicId) throws MessageDaoException {
+        Session session = sessionFactory.getCurrentSession();
         try {
+            if (topicId != null) {
+                message.setTopic((Topic) session.get(Topic.class, topicId));
+            }
             session.save(message);
             return message.getId();
         } catch (Exception e) {
             logger.error("Error occurred while sabing new comment: " + message.toString(), e);
             throw new MessageDaoException(e);
-        } finally {
-            session.close();
         }
     }
 

@@ -14,7 +14,14 @@
 <%@ taglib prefix="sp" uri="http://www.springframework.org/tags"%>
 <%@ attribute name="topic" required="true" type="net.ins.xlogger.msg.entities.Topic" %>
 
-<sf:form class="form" role="form" modelAttribute="form" method="POST" action="comment/${topic.id}/add">
-  <sf:textarea class="form-control" path="body" required="required" rows="5" size="4000" /><sf:errors path="body" element="label" cssClass="error" for="body"/>
-  <button type="submit" class="btn btn-default"><sp:message code="view.wall.comment"/></button>
-</sf:form>
+<div id="wall-comment-wrapper-${topic.id}">
+    <div id="wall-comment-${topic.id}" class="wall-comment" data-topicid="${topic.id}">
+      <sf:form class="form" role="form" modelAttribute="form" method="POST" action="comment/${topic.id}/add">
+        <sf:textarea class="form-control" path="body" required="required" rows="5" size="4000" /><sf:errors path="body" element="label" cssClass="error" for="body"/>
+        <button type="submit" class="btn btn-default"><sp:message code="view.wall.comment"/></button>
+      </sf:form>
+    </div>
+    <div class="wall-comment-add">
+        <input type="button" class="btn btn-default wall-comment-btn" id="${topic.id}_add" value="<sp:message code="view.wall.comment"/>">
+    </div>
+</div>

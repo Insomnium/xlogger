@@ -12,6 +12,7 @@
     <script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <link href="<c:url value='/resources/static/css/jquery-ui-ins.css' />" rel="stylesheet">
     <script src="<c:url value='/resources/static/js/common.js' />"></script>
+    <script src="<c:url value='/resources/static/js/wall.js' />"></script>
     <decorator:head/>
 </head>
 <body>
