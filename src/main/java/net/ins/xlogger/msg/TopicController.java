@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
@@ -54,6 +55,7 @@ public class TopicController {
         try {
             model.put("topic", topicDao.getTopicById(id));
             model.put("messages", messageDao.listTopicMessages(id));
+            model.put("form", new MessageRequest());
         } catch (MessageDaoException e) {
             logger.error("Error occurred while getting topic: " + id);
         }
@@ -87,7 +89,7 @@ public class TopicController {
             return new ModelAndView("add-topic");
         }
 
-        return new ModelAndView("wall");
+        return new ModelAndView(new RedirectView("/wall"));
     }
 
 //    @RequestMapping(value = "/comment", method = RequestMethod.GET)

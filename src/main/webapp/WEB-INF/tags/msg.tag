@@ -10,7 +10,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="xlogger" %>
 <%--<%@ taglib prefix="l" uri="http://net.ins.xlogger" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ attribute name="msg" required="true" type="net.ins.xlogger.msg.entities.Topic" %>
+<%@ attribute name="msg" required="true" type="net.ins.xlogger.msg.entities.Message" %>
 
 <div id="msg-${msg.id}">
   <div>${msg.subject}</div>

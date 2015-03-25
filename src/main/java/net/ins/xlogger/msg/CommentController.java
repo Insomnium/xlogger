@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.Locale;
@@ -32,7 +33,7 @@ public class CommentController {
     @Autowired
     private MessageSource messageSource;
 
-    @RequestMapping(value = "/{id}/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ModelAndView commentFrom(
             @PathVariable("id") Long topicId,
             @ModelAttribute("form") @Valid MessageRequest form,
@@ -51,6 +52,9 @@ public class CommentController {
             logger.error("Error occurred while adding comment from wall. Topic id: " + topicId + "; userId: " + userId);
         }
 
-        return new ModelAndView("wall");
+        if (topicId != null) {
+            return new ModelAndView(new RedirectView("/topic/" + topicId));
+        }
+        return new ModelAndView(new RedirectView("/wall"));
     }
 }

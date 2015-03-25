@@ -163,9 +163,6 @@ public class Message implements Serializable {
                 ", subject='" + subject + '\'' +
                 ", markupType=" + markupType +
                 ", postDate=" + postDate +
-                ", topic=" + topic +
-                ", replyTo=" + replyTo +
-                ", replies=" + replies +
                 '}';
     }
 }

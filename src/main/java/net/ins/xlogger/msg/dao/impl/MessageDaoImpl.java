@@ -71,11 +71,14 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public long createMessage(Message message, Long topicId) throws MessageDaoException {
+    public long createMessage(Message message, Long topicId, Long commentId) throws MessageDaoException {
         Session session = sessionFactory.getCurrentSession();
         try {
             if (topicId != null) {
                 message.setTopic((Topic) session.get(Topic.class, topicId));
+            }
+            if (commentId != null) {
+                message.setReplyTo((Message) session.get(Message.class, commentId));
             }
             session.save(message);
             return message.getId();

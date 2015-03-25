@@ -17,9 +17,11 @@
 <body>
   <div>${topic.subject}</div>
   <div>${topic.body}</div>
+  <xlogger:reply topic="${topic}" />
   <c:forEach var="msg" items="${messages}">
     <xlogger:msg msg="${msg}" />
+    <xlogger:reply topic="${topic}" comment="${msg}" />
   </c:forEach>
-  <a class="btn btn-default" href="${pageContext.request.contextPath}/topic/comment"><sp:message code="view.message.add"/></a>
+  <%--<a class="btn btn-default" href="${pageContext.request.contextPath}/topic/comment"><sp:message code="view.message.add"/></a>--%>
 </body>
 </html>

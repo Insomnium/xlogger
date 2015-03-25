@@ -1,3 +1,8 @@
-1. Accomplish commenting from wall implementation
-2. Add 'replyTo' field to message table. So there will be 2 identifiers: topicId and replyTo (message relative). Both
+1. Fix disappearing nickname and logout link from non-wall pages
+2. Think of JdbcTemplate DAO reimplementation
+3. Add more styles (wall topics separation)
+4. Add author id's to topic and message tables!!! :)
+
+DONE: Accomplish commenting from wall implementation
+DONE: Add 'replyTo' field to message table. So there will be 2 identifiers: topicId and replyTo (message relative). Both
     are nullable.

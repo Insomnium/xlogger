@@ -12,6 +12,7 @@ public class MessageRequest implements Serializable {
     @NotEmpty(message = "{message,validation.body.empty}")
     private String body;
     private MarkupType markupType;
+    private Long commentId;
 
     public MessageRequest() {
 
@@ -25,6 +26,11 @@ public class MessageRequest implements Serializable {
     public MessageRequest(String subject, String body, MarkupType markupType) {
         this(subject, body);
         this.markupType = markupType;
+    }
+
+    public MessageRequest(String subject, String body, MarkupType markupType, Long commentId) {
+        this(subject, body, markupType);
+        this.commentId = commentId;
     }
 
     public String getSubject() {
@@ -49,5 +55,13 @@ public class MessageRequest implements Serializable {
 
     public void setMarkupType(MarkupType markupType) {
         this.markupType = markupType;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 }

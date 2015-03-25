@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
         }
 
         try {
-            return messageDao.createMessage(msg, topicId);
+            return messageDao.createMessage(msg, topicId, message.getCommentId());
         } catch (MessageDaoException e) {
             throw new CommentServiceException(e);
         }
