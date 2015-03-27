@@ -10,4 +10,5 @@ public interface UserDao {
     boolean checkEmailExists(String email);
     long create(User user);
     long create(String login, String password, String email, String firstName, String lastName);
+    void update(User user);
 }

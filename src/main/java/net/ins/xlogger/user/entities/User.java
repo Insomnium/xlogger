@@ -1,9 +1,13 @@
 package net.ins.xlogger.user.entities;
 
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -14,9 +18,11 @@ import java.util.Set;
 @Entity
 @Table(name = "USERS")
 @NamedQueries({
-        @NamedQuery(name = "user.selectByLogin", query = "select u from User u where u.login = :login"),
+        @NamedQuery(name = "user.selectByLogin", query = "select u from User u where u.login = :login", cacheable = true, cacheRegion = "Users"),
         @NamedQuery(name = "user.countByEmail", query = "select count(1) from User u where u.email = :email")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "Users")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

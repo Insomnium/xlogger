@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $('.wall-comment').hide();
-    $('.wall-comment-add').click(function () {
-        $('.wall-comment').hide();
-        $(this).siblings(".wall-comment").show();
+    $('.wall-reply').hide();
+    $('.wall-reply-add').click(function () {
+        $('.wall-reply').hide();
+        $(this).siblings(".wall-reply").show();
     });
 
     $('textarea#body').keydown(function (e) {

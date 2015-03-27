@@ -75,10 +75,10 @@ public class MessageDaoImpl implements MessageDao {
         Session session = sessionFactory.getCurrentSession();
         try {
             if (topicId != null) {
-                message.setTopic((Topic) session.get(Topic.class, topicId));
+                message.setTopic((Topic) session.byId(Topic.class).getReference(topicId));
             }
             if (commentId != null) {
-                message.setReplyTo((Message) session.get(Message.class, commentId));
+                message.setReplyTo((Message) session.byId(Message.class).getReference(commentId));
             }
             session.save(message);
             return message.getId();

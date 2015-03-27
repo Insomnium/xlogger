@@ -15,37 +15,26 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "message.getByTopicId", query = "select m from Message m where m.topic.id = :topicId")
 })
+@Access(AccessType.PROPERTY)
 public class Message implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", insertable = true, updatable = false, nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "body", insertable = true, updatable = false, nullable = true, unique = false)
     private String body;
 
-    @Column(name = "subject", insertable = true, updatable = false, nullable = true, unique = false)
     private String subject;
 
-    @Column(name = "markup", insertable = true, updatable = false, nullable = false, unique = false)
-    @Enumerated(EnumType.STRING)
+
     private MarkupType markupType;
 
-    @Column(name = "post_date", insertable = true, updatable = false, nullable = false, unique = false)
     private Date postDate;
 
 //    @Column(name = "topic_id", insertable = true, updatable = false, nullable = true, unique = false)
 //    private Long topicId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "topic_id")
     private Topic topic;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reply_to")
     private Message replyTo;
 
-    @OneToMany(mappedBy = "replyTo")
     private List<Message> replies;
 
     public Message() {
@@ -59,6 +48,10 @@ public class Message implements Serializable {
         this.postDate = postDate;
     }
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = true, updatable = false, nullable = false, unique = true)
     public Long getId() {
         return id;
     }
@@ -67,6 +60,7 @@ public class Message implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "body", insertable = true, updatable = false, nullable = true, unique = false)
     public String getBody() {
         return body;
     }
@@ -75,6 +69,8 @@ public class Message implements Serializable {
         this.body = body;
     }
 
+    @Column(name = "markup", insertable = true, updatable = false, nullable = false, unique = false)
+    @Enumerated(EnumType.STRING)
     public MarkupType getMarkupType() {
         return markupType;
     }
@@ -83,6 +79,7 @@ public class Message implements Serializable {
         this.markupType = markupType;
     }
 
+    @Column(name = "post_date", insertable = true, updatable = false, nullable = false, unique = false)
     public Date getPostDate() {
         return postDate;
     }
@@ -91,6 +88,7 @@ public class Message implements Serializable {
         this.postDate = postDate;
     }
 
+    @Column(name = "subject", insertable = true, updatable = false, nullable = true, unique = false)
     public String getSubject() {
         return subject;
     }
@@ -99,6 +97,8 @@ public class Message implements Serializable {
         this.subject = subject;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reply_to")
     public Message getReplyTo() {
         return replyTo;
     }
@@ -107,6 +107,7 @@ public class Message implements Serializable {
         this.replyTo = replyTo;
     }
 
+    @OneToMany(mappedBy = "replyTo")
     public List<Message> getReplies() {
         return replies;
     }
@@ -115,6 +116,8 @@ public class Message implements Serializable {
         this.replies = replies;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id")
     public Topic getTopic() {
         return topic;
     }

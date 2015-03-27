@@ -1,6 +1,11 @@
 package net.ins.xlogger.user.entities;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -8,6 +13,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "roles")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "Users")
 public class Role {
 
     @Id

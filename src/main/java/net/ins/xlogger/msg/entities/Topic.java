@@ -1,8 +1,12 @@
 package net.ins.xlogger.msg.entities;
 
 import net.ins.xlogger.msg.MarkupType;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,42 +15,31 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TOPIC")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "Topics")
+@Access(AccessType.PROPERTY)
 public class Topic implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", insertable = true, updatable = false, nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "subject", insertable = true, updatable = false, nullable = false, unique = false)
     private String subject;
 
-    @Column(name = "body", insertable = true, updatable = false, nullable = false, unique = false)
     private String body;
 
-    @Column(name = "markup", insertable = true, updatable = true, nullable = false, unique = false)
-    @Enumerated(EnumType.STRING)
     private MarkupType markupType;
 
-    @Column(name = "post_date", insertable = true, updatable = false, nullable = false, unique = false)
     private Date postDate;
 
-    @Column(name = "last_mod_date", insertable = true, updatable = true, nullable = true, unique = false)
     private Date lastModificationDate;
 
-    @Column(name = "deleted", insertable = true, updatable = true, nullable = false, unique = false)
     private boolean deleted;
 
-    @Column(name = "resolved", insertable = true, updatable = true, nullable = false, unique = false)
     private boolean resolved;
 
-    @Column(name = "shout", insertable = true, updatable = true, nullable = false, unique = false)
     private boolean shout;
 
-    @Column(name = "is_draft", insertable = true, updatable = true, nullable = false, unique = false)
     private boolean draft;
 
-    @Transient
     private String url;
 
     public Topic() {
@@ -65,6 +58,9 @@ public class Topic implements Serializable {
         this.draft = draft;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = true, updatable = false, nullable = false, unique = true)
     public Long getId() {
         return id;
     }
@@ -73,6 +69,7 @@ public class Topic implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "subject", insertable = true, updatable = false, nullable = false, unique = false)
     public String getSubject() {
         return subject;
     }
@@ -81,6 +78,7 @@ public class Topic implements Serializable {
         this.subject = subject;
     }
 
+    @Column(name = "body", insertable = true, updatable = false, nullable = false, unique = false)
     public String getBody() {
         return body;
     }
@@ -89,6 +87,8 @@ public class Topic implements Serializable {
         this.body = body;
     }
 
+    @Column(name = "markup", insertable = true, updatable = true, nullable = false, unique = false)
+    @Enumerated(EnumType.STRING)
     public MarkupType getMarkupType() {
         return markupType;
     }
@@ -97,6 +97,7 @@ public class Topic implements Serializable {
         this.markupType = markupType;
     }
 
+    @Column(name = "post_date", insertable = true, updatable = false, nullable = false, unique = false)
     public Date getPostDate() {
         return postDate;
     }
@@ -105,6 +106,7 @@ public class Topic implements Serializable {
         this.postDate = postDate;
     }
 
+    @Column(name = "last_mod_date", insertable = true, updatable = true, nullable = true, unique = false)
     public Date getLastModificationDate() {
         return lastModificationDate;
     }
@@ -113,6 +115,7 @@ public class Topic implements Serializable {
         this.lastModificationDate = lastModificationDate;
     }
 
+    @Column(name = "deleted", insertable = true, updatable = true, nullable = false, unique = false)
     public boolean isDeleted() {
         return deleted;
     }
@@ -121,6 +124,7 @@ public class Topic implements Serializable {
         this.deleted = deleted;
     }
 
+    @Column(name = "resolved", insertable = true, updatable = true, nullable = false, unique = false)
     public boolean isResolved() {
         return resolved;
     }
@@ -129,6 +133,7 @@ public class Topic implements Serializable {
         this.resolved = resolved;
     }
 
+    @Column(name = "shout", insertable = true, updatable = true, nullable = false, unique = false)
     public boolean isShout() {
         return shout;
     }
@@ -137,6 +142,7 @@ public class Topic implements Serializable {
         this.shout = shout;
     }
 
+    @Column(name = "is_draft", insertable = true, updatable = true, nullable = false, unique = false)
     public boolean isDraft() {
         return draft;
     }
@@ -145,6 +151,7 @@ public class Topic implements Serializable {
         this.draft = draft;
     }
 
+    @Transient
     public String getUrl() {
         return url;
     }

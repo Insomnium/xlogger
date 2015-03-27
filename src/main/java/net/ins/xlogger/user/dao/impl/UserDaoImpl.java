@@ -4,6 +4,7 @@ import net.ins.xlogger.user.dao.UserDao;
 import net.ins.xlogger.user.entities.Role;
 import net.ins.xlogger.user.entities.User;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public User getUser(String login) {
-        return (User) sessionFactory.getCurrentSession().getNamedQuery("user.selectByLogin")
-                .setParameter("login", login)
+        Query query = sessionFactory.getCurrentSession().getNamedQuery("user.selectByLogin")
+                .setParameter("login", login);
+
+        return (User) query
                 .uniqueResult();
     }
 
@@ -75,6 +78,17 @@ public class UserDaoImpl implements UserDao {
         user.setBlocked(false);
 
         return create(user);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void update(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(session);
+        sessionFactory.getCache().evictEntity(User.class, user);
+
+        // FIXME !!!!! HIGHLY IMPORTANT !!!!! CHECK EVICTING SAME NAMED _QUERY_ CACHE DOES NOT EVICT THE ENTIRE REGION !!!!!!
+        sessionFactory.getCache().evictQueryRegion("Users");
     }
 
 //    @CachePut("Users")

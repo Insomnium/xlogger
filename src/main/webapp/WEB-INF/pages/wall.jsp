@@ -18,8 +18,10 @@
   <p>Welcome to xlogger</p>
   <a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/topic/add"><sp:message code="view.wall.topic.new"/></a>
   <c:forEach var="topic" items="${topics}">
-    <xlogger:wall-msg msg="${topic}" />
-    <xlogger:reply topic="${topic}" />
+    <div class="comment-wrapper">
+      <xlogger:wall-msg msg="${topic}" />
+      <xlogger:reply topic="${topic}" />
+    </div>
   </c:forEach>
 </body>
 </html>

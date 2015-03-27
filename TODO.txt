@@ -1,7 +1,10 @@
-1. Fix disappearing nickname and logout link from non-wall pages
-2. Think of JdbcTemplate DAO reimplementation
-3. Add more styles (wall topics separation)
-4. Add author id's to topic and message tables!!! :)
+1. Think of JdbcTemplate DAO reimplementation
+2. Add author id's to topic and message tables!!! :)
+
+EXTRA: Partial second-level cache implementation
+
+DONE: Fix disappearing nickname and logout link from non-wall pages
+DONE: Add more styles (wall topics separation)
 
 DONE: Accomplish commenting from wall implementation
 DONE: Add 'replyTo' field to message table. So there will be 2 identifiers: topicId and replyTo (message relative). Both

@@ -19,8 +19,10 @@
   <div>${topic.body}</div>
   <xlogger:reply topic="${topic}" />
   <c:forEach var="msg" items="${messages}">
-    <xlogger:msg msg="${msg}" />
-    <xlogger:reply topic="${topic}" comment="${msg}" />
+      <div class="comment-wrapper">
+        <xlogger:msg msg="${msg}" />
+        <xlogger:reply topic="${topic}" comment="${msg}" />
+      </div>
   </c:forEach>
   <%--<a class="btn btn-default" href="${pageContext.request.contextPath}/topic/comment"><sp:message code="view.message.add"/></a>--%>
 </body>

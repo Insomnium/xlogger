@@ -1,3 +1,11 @@
+textarea {
+    resize: vertical;
+}
+
 .wall-comment-btn {
     font-size: 0.8em;
+}
+
+.comment-wrapper {
+    margin-top: 1.5em;
 }

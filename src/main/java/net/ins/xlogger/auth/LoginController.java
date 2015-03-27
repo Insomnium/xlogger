@@ -61,7 +61,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginForm(ModelMap modelMap, ServletRequest request) {
-        modelMap.put("config", UserConfig.getConfig(request));
+//        modelMap.put("config", UserConfig.getConfig(request));
         return new ModelAndView("login"); // WEB-INF/pages/login.jsp
     }
 
