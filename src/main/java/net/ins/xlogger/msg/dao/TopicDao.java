@@ -12,5 +12,5 @@ import java.util.List;
 public interface TopicDao {
     Topic getTopicById(long id) throws MessageDaoException;
     List<Topic> listUserTopics(long userId, Date searchDepth, Integer page, Integer limit) throws MessageDaoException;
-    long createTopic(Topic topic) throws MessageDaoException;
+    long createTopic(Topic topic, Long authorId) throws MessageDaoException;
 }

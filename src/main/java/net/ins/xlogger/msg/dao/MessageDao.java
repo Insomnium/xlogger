@@ -14,5 +14,5 @@ public interface MessageDao {
     Message getMessageById(long id) throws MessageDaoException;
     List<Message> listUserMessages(long userId, Date searchDepth, Integer page, Integer limit) throws MessageDaoException;
     List<Message> listTopicMessages(long topicId) throws MessageDaoException;
-    long createMessage(Message message, Long topicId, Long commentId) throws MessageDaoException;
+    long createMessage(Message message, Long authorId, Long topicId, Long commentId) throws MessageDaoException;
 }

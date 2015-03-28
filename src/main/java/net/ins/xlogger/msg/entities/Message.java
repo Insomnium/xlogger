@@ -1,6 +1,7 @@
 package net.ins.xlogger.msg.entities;
 
 import net.ins.xlogger.msg.MarkupType;
+import net.ins.xlogger.user.entities.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,6 +37,8 @@ public class Message implements Serializable {
     private Message replyTo;
 
     private List<Message> replies;
+
+    private User author;
 
     public Message() {
 
@@ -124,6 +127,16 @@ public class Message implements Serializable {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     @Override

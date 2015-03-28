@@ -32,6 +32,9 @@
             </select>
         </span>
         <c:if test="${config.authenticated}" >
+            <span style="display: inline-block;">
+                <a href="<c:url value='${pageContext.request.contextPath}/wall' />"><sp:message code="view.header.wall"/></a>
+            </span>
             <a style="float: right; margin-left: 12px"
                href="<c:url value='${pageContext.request.contextPath}/logout' />"><sp:message code="view.logout" /></a>
             <span style="float: right;"><sp:message code="view.welcome" />, ${config.userLogin}</span>

@@ -4,6 +4,7 @@ import net.ins.xlogger.common.MessageDaoException;
 import net.ins.xlogger.msg.MarkupType;
 import net.ins.xlogger.msg.dao.TopicDao;
 import net.ins.xlogger.msg.entities.Topic;
+import net.ins.xlogger.user.entities.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -68,9 +69,10 @@ public class TopicDaoImpl implements TopicDao {
 
     @Override
     @Transactional(propagation = Propagation.NEVER)
-    public long createTopic(Topic topic) throws MessageDaoException {
+    public long createTopic(Topic topic, Long authorId) throws MessageDaoException {
         Session session = sessionFactory.openSession();
         try {
+            topic.setAuthor((User) session.byId(User.class).getReference(authorId));
             session.save(topic); // save() inserts record immediately. persist() method is delayed. TODO: figure out why. First lvl cache?
             return topic.getId();
         } catch (Exception e) {

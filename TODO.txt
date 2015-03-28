@@ -1,5 +1,8 @@
-1. Think of JdbcTemplate DAO reimplementation
-2. Add author id's to topic and message tables!!! :)
+1. Change /add kinda links to common URLs with PUT methods
+
+DONE: Add author id's to topic and message tables!!! :)
+
+DEFERRED: Think of JdbcTemplate DAO reimplementation
 
 EXTRA: Partial second-level cache implementation
 

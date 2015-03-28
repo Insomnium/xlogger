@@ -76,4 +76,25 @@
             <column name="reply_to" type="bigint" />
         </addColumn>
     </changeSet>
+
+    <changeSet id="20150327_addAuthorReferences" author="Ins137@gmail.com" >
+        <addColumn tableName="msg">
+            <column name="author_id" type="bigint" />
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="msg" baseColumnNames="author_id"
+                                 constraintName="fk_msg_author"
+                                 referencedTableName="users"
+                                 referencedColumnNames="user_id" />
+
+        <addColumn tableName="topic">
+            <column name="author_id" type="bigint" />
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="topic" baseColumnNames="author_id"
+                                 constraintName="fk_topic_author"
+                                 referencedTableName="users"
+                                 referencedColumnNames="user_id" />
+    </changeSet>
+
 </databaseChangeLog>

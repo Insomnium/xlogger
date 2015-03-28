@@ -4,6 +4,7 @@ import net.ins.xlogger.common.MessageDaoException;
 import net.ins.xlogger.msg.dao.MessageDao;
 import net.ins.xlogger.msg.dao.TopicDao;
 import net.ins.xlogger.msg.entities.Topic;
+import net.ins.xlogger.util.AuthUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class TopicController {
             topic.setMarkupType(MarkupType.PLAIN);
         }
         try {
-            topicDao.createTopic(topic);
+            topicDao.createTopic(topic, AuthUtil.getUserId());
         } catch (MessageDaoException e) {
             logger.error("Error occurred while adding topic", e);
             errors.reject(null, messageSource.getMessage("error.unknown.trylater", null, locale));

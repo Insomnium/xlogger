@@ -1,6 +1,7 @@
 package net.ins.xlogger.msg.entities;
 
 import net.ins.xlogger.msg.MarkupType;
+import net.ins.xlogger.user.entities.User;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -41,6 +42,8 @@ public class Topic implements Serializable {
     private boolean draft;
 
     private String url;
+
+    private User author;
 
     public Topic() {
 
@@ -149,6 +152,16 @@ public class Topic implements Serializable {
 
     public void setDraft(boolean draft) {
         this.draft = draft;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     @Transient
