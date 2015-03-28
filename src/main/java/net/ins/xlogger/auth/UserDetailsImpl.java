@@ -1,6 +1,5 @@
 package net.ins.xlogger.auth;
 
-import net.ins.xlogger.user.entities.Role;
 import net.ins.xlogger.user.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ins on 3/3/15.
@@ -22,9 +22,8 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(User user) {
         this.user = user;
         if (!CollectionUtils.isEmpty(user.getRoles())) {
-            for (Role role : user.getRoles()) {
-                authorities.add(new SimpleGrantedAuthority(role.getRoleSysName()));
-            }
+            authorities.addAll(user.getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getRoleSysName()))
+                    .collect(Collectors.toList()));
         }
     }
 

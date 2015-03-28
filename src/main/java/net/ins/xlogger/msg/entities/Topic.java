@@ -41,8 +41,6 @@ public class Topic implements Serializable {
 
     private boolean draft;
 
-    private String url;
-
     private User author;
 
     public Topic() {
@@ -162,15 +160,6 @@ public class Topic implements Serializable {
 
     public void setAuthor(User author) {
         this.author = author;
-    }
-
-    @Transient
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @Override

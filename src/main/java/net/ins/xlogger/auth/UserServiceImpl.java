@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class UserServiceImpl implements UserDetailsService {
     private UserDao userDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userDao.getUser(login);
         return new UserDetailsImpl(user);

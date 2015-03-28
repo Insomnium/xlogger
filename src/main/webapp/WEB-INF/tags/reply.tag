@@ -12,7 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sp" uri="http://www.springframework.org/tags"%>
-<%@ attribute name="topic" required="true" type="net.ins.xlogger.msg.entities.Topic" %>
+<%@ attribute name="topic" required="true" type="net.ins.xlogger.msg.domain.PreparedTopic" %>
 <%@ attribute name="comment" required="false" type="net.ins.xlogger.msg.entities.Message" %>
 
 <div id="wall-reply-wrapper-${topic.id}" class="wall-reply-wrapper">

@@ -4,6 +4,7 @@ import net.ins.xlogger.common.MessageDaoException;
 import net.ins.xlogger.msg.dao.MessageDao;
 import net.ins.xlogger.msg.dao.TopicDao;
 import net.ins.xlogger.msg.entities.Topic;
+import net.ins.xlogger.msg.service.ContentService;
 import net.ins.xlogger.util.AuthUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -42,6 +43,9 @@ public class TopicController {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private ContentService contentService;
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addMessageForm(ModelMap model, ServletRequest request) {
         return new ModelAndView("add-topic", "form", new TopicRequest());
@@ -54,7 +58,7 @@ public class TopicController {
             @PathVariable("id") Integer id) {
 
         try {
-            model.put("topic", topicDao.getTopicById(id));
+            model.put("topic", contentService.getTopicById(id));
             model.put("messages", messageDao.listTopicMessages(id));
             model.put("form", new MessageRequest());
         } catch (MessageDaoException e) {

@@ -30,41 +30,32 @@ public class TopicDaoImpl implements TopicDao {
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional(propagation = Propagation.NEVER)
+    @Transactional(propagation = Propagation.REQUIRED)
     public Topic getTopicById(long id) throws MessageDaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             return (Topic) session.get(Topic.class, id);
         } catch (Exception e) {
             logger.error("Error occurred while getting topic: " + id);
             throw new MessageDaoException(e);
-        } finally {
-            session.close();
         }
     }
 
     @Override
-    @Transactional(propagation = Propagation.NEVER)
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Topic> listUserTopics(long userId, Date searchDepth, Integer page, Integer limit) throws MessageDaoException {
-        Session session = sessionFactory.openSession();
-        try {
-            Criteria criteria = session.createCriteria(Topic.class);
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(Topic.class);
 
-            if (searchDepth != null) {
-                criteria.add(Restrictions.le("postDate", searchDepth));
-            }
-
-            if (page != null && limit != null) {
-                criteria.setFirstResult(page * limit).setMaxResults(limit);
-            }
-
-            return criteria.list();
-        } catch (Exception e) {
-            logger.error("Error occurred while obtaining topic list for user: " + userId, e);
-            throw new MessageDaoException(e);
-        } finally {
-            session.close();
+        if (searchDepth != null) {
+            criteria.add(Restrictions.le("postDate", searchDepth));
         }
+
+        if (page != null && limit != null) {
+            criteria.setFirstResult(page * limit).setMaxResults(limit);
+        }
+
+        return criteria.list();
     }
 
     @Override
