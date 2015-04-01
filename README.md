@@ -32,7 +32,7 @@
     ```
 3. Actualize ```sql/liquibase.config``` properties file
 
-4. Execue ```scripts/prepareServer.sh``` to create database schema
+4. Execute ```scripts/prepareServer.sh``` to create database schema
 
     OR
 
@@ -40,10 +40,10 @@
     - Execute ```create-db.sh``` scipt from 'scripts' folder
     - Execute ```mvn liquibase:update``` to update database
 5. Build application with ```mvn package``` and copy *war* file into 'webapps' Tomcat directory
-6. Run tomcat and get it worked :)
+6. Run tomcat and get it working :)
 
 ### Debugging with jetty
 
-Following command will run ready out-of-box jetty with 8123 debug port. You'll get working application immediately at 8085 port.
+Following command will run ready out-of-box jetty on 8123 debug port. You'll get working application immediately at 8085 port.
 ```sh
 ./start_debug.sh -pd
