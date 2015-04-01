@@ -1,20 +1,20 @@
 #!/bin/bash
 export MAVEN_OPTS="-agentlib:jdwp=transport=dt_socket,address=8123,server=y,suspend=n"
 
-cmd='mvn '
+cmd='mvn'
 
 while getopts 'pd' opt; do
     case "$opt" in
         p)
-            cmd+=' clean package'  
+            cmd='$cmd clean package'  
             ;;     
         d)
-            cmd+=' liquibase:update'          
+            cmd='$cmd liquibase:update'          
             ;;
     esac
 done
 
-cmd+=' jetty:run'
+cmd='$cmd jetty:run'
 
 echo "Running: $cmd"
 $cmd
