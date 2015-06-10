@@ -1,7 +1,6 @@
 package net.ins.xlogger.msg.dao.impl;
 
-import net.ins.xlogger.common.MessageDaoException;
-import net.ins.xlogger.msg.MarkupType;
+import net.ins.xlogger.exceptions.MessageDaoException;
 import net.ins.xlogger.msg.dao.TopicDao;
 import net.ins.xlogger.msg.entities.Topic;
 import net.ins.xlogger.user.entities.User;

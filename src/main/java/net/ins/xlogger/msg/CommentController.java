@@ -1,7 +1,7 @@
 package net.ins.xlogger.msg;
 
-import net.ins.xlogger.common.CommentServiceException;
-import net.ins.xlogger.msg.service.CommentService;
+import net.ins.xlogger.exceptions.CommentServiceException;
+import net.ins.xlogger.msg.service.ContentService;
 import net.ins.xlogger.util.AuthUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class CommentController {
     private static final Logger logger = Logger.getLogger(CommentController.class);
 
     @Autowired
-    private CommentService commentService;
+    private ContentService contentService;
 
     @Autowired
     private MessageSource messageSource;
@@ -46,7 +46,7 @@ public class CommentController {
 
         long userId = AuthUtil.getUserId();
         try {
-            commentService.addComment(topicId, userId, form);
+            contentService.addComment(topicId, userId, form);
         } catch (CommentServiceException e) {
             errors.reject(null, messageSource.getMessage("error.unknown.trylater", null, locale));
             logger.error("Error occurred while adding comment from wall. Topic id: " + topicId + "; userId: " + userId);

@@ -49,10 +49,6 @@
 
                 <prop key="hibernate.generate_statistics">true</prop>
                 <prop key="hibernate.cache.use_structured_entries">true</prop>
-                <!--<prop key=""-->
-                <!--<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>-->
-                <!--<prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>-->
-                <!--<prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>-->
             </props>
         </property>
     </bean>

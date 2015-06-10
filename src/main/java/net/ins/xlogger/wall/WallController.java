@@ -1,6 +1,6 @@
 package net.ins.xlogger.wall;
 
-import net.ins.xlogger.common.DaoException;
+import net.ins.xlogger.exceptions.DaoException;
 import net.ins.xlogger.msg.MessageRequest;
 import net.ins.xlogger.msg.domain.PreparedTopic;
 import net.ins.xlogger.msg.service.ContentService;

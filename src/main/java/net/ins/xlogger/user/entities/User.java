@@ -1,6 +1,7 @@
 package net.ins.xlogger.user.entities;
 
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -63,6 +64,7 @@ public class User implements Serializable {
     @JoinTable(name = "user_roles",
                 joinColumns = { @JoinColumn(name = "user_id")},
                 inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    @Cache(region = "Users", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Role> roles;
 
     public User() {

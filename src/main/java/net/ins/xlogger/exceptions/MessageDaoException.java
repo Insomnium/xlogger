@@ -1,4 +1,4 @@
-package net.ins.xlogger.common;
+package net.ins.xlogger.exceptions;
 
 /**
  * Created by ins on 3/7/15.

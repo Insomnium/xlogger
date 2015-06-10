@@ -17,6 +17,7 @@
     <http pattern="/resources/**" security="none" />
     <http use-expressions="true" auto-config="false" authentication-manager-ref="authenticationManager"  > <!-- create-session="stateless" entry-point-ref="authenticationEntryPoint" -->
         <intercept-url pattern="/**" access="isAuthenticated()" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/login_failed" access="permitAll" />
         <intercept-url pattern="/perform_login" access="permitAll" />
         <intercept-url pattern="/registration" access="permitAll" />

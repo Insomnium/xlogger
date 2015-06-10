@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -38,6 +37,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<User> listUsers() {
+        return sessionFactory.getCurrentSession().createCriteria(User.class).list();
+    }
+
+    @Override
     @Transactional(propagation = Propagation.NEVER)
     public boolean checkEmailExists(String email) {
         Session session = sessionFactory.openSession();
@@ -57,7 +62,7 @@ public class UserDaoImpl implements UserDao {
         Session session = sessionFactory.getCurrentSession();
         try {
             user.setRoles(new HashSet<Role>());
-            user.getRoles().add((Role) session.byId(Role.class).getReference(net.ins.xlogger.user.Role.USER.getRoleId()));
+            user.getRoles().add((Role) session.byId(Role.class).getReference(net.ins.xlogger.user.domain.Role.USER.getRoleId()));
             session.save(user);
         } catch (Exception e) {
             logger.error("Error occurred while creating user", e);

@@ -1,4 +1,6 @@
-1. Change /add kinda links to common URLs with PUT methods
+1. Show comment and topic author and post date
+2. Change /add kinda links to common URLs with PUT methods
+3. Combine net.ins.xlogger.msg.service.ContentService and net.ins.xlogger.msg.service.CommentService
 
 DONE: Add author id's to topic and message tables!!! :)
 
