@@ -9,3 +9,7 @@ textarea {
 .comment-wrapper {
     margin-top: 1.5em;
 }
+
+.title {
+    font-weight: bold;
+}

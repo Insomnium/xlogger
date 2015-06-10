@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
     public long create(User user) {
         Session session = sessionFactory.getCurrentSession();
         try {
-            user.setRoles(new HashSet<Role>());
+            user.setRoles(new HashSet<>());
             user.getRoles().add((Role) session.byId(Role.class).getReference(net.ins.xlogger.user.domain.Role.USER.getRoleId()));
             session.save(user);
         } catch (Exception e) {

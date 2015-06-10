@@ -17,24 +17,20 @@
 
 <div id="wall-reply-wrapper-${topic.id}" class="wall-reply-wrapper">
     <div id="wall-reply-${topic.id}" class="wall-reply" data-topicid="${topic.id}">
+      <%-- Hidden form opening when user clicks 'Add comment' --%>
       <sf:form class="form" role="form" modelAttribute="form" method="POST" action="/comment/${topic.id}">
-        <sf:textarea class="form-control" path="body" required="required" rows="5" size="4000" /><sf:errors path="body" element="label" cssClass="error" for="body"/>
+        <sf:textarea id="reply-area" class="form-control" path="body" required="required" rows="5" size="4000" /><sf:errors path="body" element="label" cssClass="error" for="body"/>
           <c:if test="${comment != null}">
             <sf:input hidden="true" path="commentId" value="${comment.id}" />
           </c:if>
-        <button type="submit" class="btn btn-default btn-xs"><sp:message code="view.wall.comment"/></button>
+          <c:choose>
+              <c:when test="${comment != null}">
+                  <input type="button" class="btn btn-link reply-btn" id="${topic.id}_add" value="<sp:message code="view.reply"/>">
+              </c:when>
+              <c:otherwise>
+                  <input type="button" class="btn btn-link reply-btn" id="${topic.id}_add" value="<sp:message code="view.wall.comment"/>">
+              </c:otherwise>
+          </c:choose>
       </sf:form>
-    </div>
-    <div class="wall-reply-add">
-        <c:choose>
-            <c:when test="${comment != null}">
-                <input type="button" class="btn btn-default btn-xs" id="${topic.id}_add" value="<sp:message code="view.wall.comment"/>">
-            </c:when>
-            <c:otherwise>
-                <input type="button" class="btn btn-default btn-xs" id="${topic.id}_add" value="<sp:message code="view.reply"/>">
-            </c:otherwise>
-        </c:choose>
-
-
     </div>
 </div>

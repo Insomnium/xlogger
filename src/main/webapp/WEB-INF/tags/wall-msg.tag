@@ -13,6 +13,6 @@
 <%@ attribute name="msg" required="true" type="net.ins.xlogger.msg.domain.PreparedTopic" %>
 
 <div id="msg-${msg.id}">
-  <a href="${msg.url}">${msg.subject}</a>
+  <a class="title" href="${msg.url}">${msg.subject}</a>
   <div>${msg.body}</div>
 </div>
