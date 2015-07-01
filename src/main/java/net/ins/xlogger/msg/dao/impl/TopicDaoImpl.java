@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,6 +54,8 @@ public class TopicDaoImpl implements TopicDao {
         if (page != null && limit != null) {
             criteria.setFirstResult(page * limit).setMaxResults(limit);
         }
+
+        criteria.addOrder(Order.desc("postDate"));
 
         return criteria.list();
     }
