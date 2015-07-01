@@ -115,4 +115,11 @@
             <column name="carma" type="int" defaultValue="0" />
         </addColumn>
     </changeSet>
+
+    <changeSet id="20150701_decapitalizing_adm_login" author="Ins137@gmail.com">
+        <update tableName="users">
+            <column name="login" value='admin' type="varchar(200)" />
+            <where>login = 'Admin'</where>
+        </update>
+    </changeSet>
 </databaseChangeLog>

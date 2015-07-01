@@ -14,7 +14,7 @@ public class UserConfig {
     private User userDetails;
 
     public UserConfig(WebApplicationContext appCtx) {
-        this.config = (Config) appCtx.getBean("config");
+        this.config = appCtx.getBean(Config.class);
         this.userDetails = AuthUtil.getUserDetails();
     }
 

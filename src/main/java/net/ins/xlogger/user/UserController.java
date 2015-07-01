@@ -4,6 +4,7 @@ import net.ins.xlogger.user.dao.UserDao;
 import net.ins.xlogger.user.entities.User;
 import net.ins.xlogger.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class UserController {
         return userDao.getUser(login);
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView listUsers(ModelMap model) {
         return new ModelAndView("userlist", "users", userService.listUsers());

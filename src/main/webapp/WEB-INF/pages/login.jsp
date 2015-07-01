@@ -19,7 +19,7 @@
     </c:if>
 
     <%--<form name='loginForm' role='form' action="${config.mainUrl}/perform_login" method='POST'>--%>
-    <form name='loginForm' role='form' action="<c:url value='/j_spring_security_check' />" method='POST'>
+    <form name='loginForm' role='form' action="<c:url value='/perform_login' />" method='POST'>
         <div class='form-group'>
             <label for='login'><sp:message code="view.welcome.login" />:</label>
             <input type='text' class='form-control' id='login' name='login'>

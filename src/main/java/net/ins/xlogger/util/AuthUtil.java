@@ -24,12 +24,17 @@ public class AuthUtil {
     }
 
     public static User getUserDetails() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!isAuthenticated()) {
             return null;
         }
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ((UserDetailsImpl) principal).getUser();
+        Object principal = auth.getPrincipal();
+        if (principal != null && principal instanceof UserDetailsImpl) {
+            return ((UserDetailsImpl) principal).getUser();
+        }
+
+        return null;
     }
 
     public static boolean isAdmin() {

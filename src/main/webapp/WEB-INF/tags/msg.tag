@@ -13,6 +13,7 @@
 <%@ attribute name="msg" required="true" type="net.ins.xlogger.msg.entities.Message" %>
 
 <div id="msg-${msg.id}">
+  <%--<div id="author">${msg.author.login}</div>--%>
   <div>${msg.subject}</div>
   <div>${msg.body}</div>
 </div>

@@ -13,3 +13,7 @@ textarea {
 .title {
     font-weight: bold;
 }
+
+#author {
+    color: #333333;
+}
